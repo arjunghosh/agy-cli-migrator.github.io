@@ -10,20 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #030712;
-            --text-color: #f9fafb;
-            --text-muted: #9ca3af;
-            --primary: #06b6d4;
-            --primary-glow: rgba(6, 182, 212, 0.25);
-            --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.25);
-            --card-bg: rgba(17, 24, 39, 0.6);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --terminal-bg: #0b0f19;
+            --bg-color: #09090b; /* zinc-950 */
+            --text-color: #f4f4f5; /* zinc-100 */
+            --text-muted: #a1a1aa; /* zinc-400 */
+            --primary: #10b981; /* emerald-500 */
+            --primary-glow: rgba(16, 185, 129, 0.1);
+            --accent: #27272a; /* zinc-800 */
+            --card-bg: #18181b; /* zinc-900 */
+            --card-border: rgba(255, 255, 255, 0.06);
+            --terminal-bg: #0c0c0e;
             --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-            --gradient-primary: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
-            --gradient-glowing: linear-gradient(90deg, #06b6d4, #8b5cf6, #06b6d4);
+            --header-bg: rgba(9, 9, 11, 0.8);
         }
 
         * {
@@ -43,8 +41,8 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(24, 24, 27, 0.05) 0%, transparent 40%);
             background-attachment: fixed;
         }
 
@@ -56,14 +54,14 @@
 
         /* Header / Navigation */
         header {
-            padding: 1.5rem 0;
+            padding: 1.25rem 0;
             border-bottom: 1px solid var(--card-border);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(3, 7, 18, 0.7);
+            background: var(--header-bg);
         }
 
         .nav-wrapper {
@@ -73,20 +71,18 @@
         }
 
         .logo {
-            font-weight: 900;
-            font-size: 1.6rem;
+            font-weight: 800;
+            font-size: 1.5rem;
             letter-spacing: -0.05em;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-color);
             display: flex;
             align-items: center;
             gap: 0.6rem;
         }
 
-        .logo::before {
-            content: "⚡";
-            -webkit-text-fill-color: initial;
+        .logo-symbol {
+            color: var(--primary);
+            font-weight: 900;
         }
 
         .nav-links {
@@ -101,38 +97,36 @@
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: color 0.2s ease;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary-glow);
+            color: var(--text-color);
         }
 
         /* Hero Section */
         .hero {
-            padding: 7rem 0 4rem;
+            padding: 7rem 0 5rem;
             text-align: center;
             position: relative;
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 3.8rem;
             font-weight: 900;
             letter-spacing: -0.05em;
-            line-height: 1.1;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #ffffff;
         }
 
         .hero-subtitle {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             color: var(--text-muted);
-            max-width: 750px;
+            max-width: 720px;
             margin: 0 auto 3rem;
-            font-weight: 300;
+            font-weight: 400;
+            line-height: 1.6;
         }
 
         .badge-container {
@@ -144,42 +138,43 @@
         }
 
         .badge {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--card-border);
             padding: 0.5rem 1.2rem;
             border-radius: 9999px;
             font-size: 0.85rem;
             font-weight: 600;
-            color: #e5e7eb;
+            color: #d1d5db;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease;
         }
 
         .badge:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
-        .badge-cyan { border-color: rgba(6, 182, 212, 0.4); color: var(--primary); box-shadow: 0 0 15px rgba(6, 182, 212, 0.1); }
-        .badge-purple { border-color: rgba(139, 92, 246, 0.4); color: var(--accent); box-shadow: 0 0 15px rgba(139, 92, 246, 0.1); }
+        .badge-icon {
+            color: var(--primary);
+            flex-shrink: 0;
+        }
 
         /* CTA Buttons */
         .cta-group {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1.2rem;
             margin-bottom: 4rem;
         }
 
         .btn {
-            padding: 0.9rem 2.2rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 12px;
+            padding: 0.85rem 2.2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s ease;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -187,67 +182,44 @@
         }
 
         .btn-primary {
-            background: var(--gradient-primary);
-            color: #ffffff;
-            box-shadow: 0 4px 25px rgba(6, 182, 212, 0.3);
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-primary:hover::after {
-            left: 100%;
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #ffffff;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 30px rgba(6, 182, 212, 0.55);
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--text-color);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--accent);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
         }
 
         /* Interactive Terminal Simulator */
         .terminal-window {
             background-color: var(--terminal-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(6, 182, 212, 0.05);
-            max-width: 850px;
+            border-radius: 12px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
+            max-width: 800px;
             margin: 0 auto 5rem;
             overflow: hidden;
             text-align: left;
             position: relative;
         }
 
-        .terminal-window::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
-        }
-
         .terminal-header {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.01);
+            padding: 0.85rem 1.25rem;
             display: flex;
             align-items: center;
             border-bottom: 1px solid var(--card-border);
@@ -260,23 +232,19 @@
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
+            background-color: #27272a;
         }
-
-        .dot-red { background-color: #ef4444; }
-        .dot-yellow { background-color: #eab308; }
-        .dot-green { background-color: #22c55e; }
 
         .terminal-title {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             font-family: var(--font-mono);
-            letter-spacing: 0.05em;
         }
 
         .terminal-actions {
@@ -284,31 +252,30 @@
         }
 
         .demo-trigger {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--primary);
-            border: 1px solid rgba(6, 182, 212, 0.3);
-            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            color: #ffffff;
+            border: 1px solid var(--accent);
+            padding: 0.3rem 0.85rem;
             border-radius: 6px;
             font-family: var(--font-sans);
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .demo-trigger:hover {
-            background: var(--primary);
-            color: #ffffff;
-            box-shadow: 0 0 10px var(--primary-glow);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
         .terminal-body {
-            padding: 1.75rem;
+            padding: 1.5rem;
             font-family: var(--font-mono);
-            font-size: 0.95rem;
-            color: #e5e7eb;
-            min-height: 380px;
-            max-height: 480px;
+            font-size: 0.9rem;
+            color: #d4d4d8;
+            min-height: 350px;
+            max-height: 450px;
             overflow-y: auto;
             white-space: pre-wrap;
             position: relative;
@@ -322,7 +289,7 @@
         .cursor {
             display: inline-block;
             width: 8px;
-            height: 15px;
+            height: 14px;
             background: #ffffff;
             margin-left: 4px;
             animation: blink 0.8s infinite;
@@ -336,73 +303,50 @@
         /* Features Section */
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
             letter-spacing: -0.04em;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, #ffffff 60%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 3.5rem;
+            color: #ffffff;
         }
 
         .features-grid {
             display: grid;
-            grid-template-cols: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
+            grid-template-cols: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-bottom: 6rem;
         }
 
         .feature-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--gradient-primary);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(6, 182, 212, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(6, 182, 212, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
 
         .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
             display: inline-block;
         }
 
         .feature-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: #ffffff;
         }
 
         .feature-card p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
         /* Graphical Flowchart Subsystem */
@@ -412,12 +356,10 @@
         }
 
         .flowchart-wrapper {
-            background: rgba(17, 24, 39, 0.4);
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 3.5rem 2rem;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 3rem 2rem;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -431,151 +373,111 @@
         }
 
         .flow-node {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.01);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            min-width: 180px;
+            border-radius: 8px;
+            padding: 1.25rem;
+            min-width: 170px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: border-color 0.2s ease;
         }
 
         .flow-node:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
-            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .flow-node h4 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .flow-node p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
         }
 
         .flow-arrow {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--primary);
-            animation: pulse-arrow 1.5s infinite;
-        }
-
-        @keyframes pulse-arrow {
-            0% { transform: translateX(0); opacity: 0.5; }
-            50% { transform: translateX(5px); opacity: 1; }
-            100% { transform: translateX(0); opacity: 0.5; }
         }
 
         /* Author Section */
         .author-box {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.04), rgba(139, 92, 246, 0.04));
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 24px;
-            padding: 4rem 3rem;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 3.5rem 2rem;
             text-align: center;
-            max-width: 850px;
+            max-width: 800px;
             margin: 0 auto 6rem;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             position: relative;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.05);
-        }
-
-        .author-box::before {
-            content: '';
-            position: absolute;
-            top: -1px; left: 10%; right: 10%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
-
-        .author-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            background: rgba(139, 92, 246, 0.1);
         }
 
         .author-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: #ffffff;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
         }
 
         .author-role {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: var(--primary);
             font-weight: 600;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
 
         .author-bio {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 2rem;
-            max-width: 680px;
+            max-width: 650px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 300;
+            line-height: 1.6;
         }
 
         .author-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
         .author-links a {
             color: #ffffff;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 0.6rem 1.5rem;
-            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
             border: 1px solid var(--card-border);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .author-links a:hover {
-            border-color: var(--accent);
-            background: rgba(139, 92, 246, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         /* Footer */
         footer {
-            padding: 4rem 0;
+            padding: 3rem 0;
             border-top: 1px solid var(--card-border);
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            background: rgba(3, 7, 18, 0.9);
+            font-size: 0.9rem;
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .hero-subtitle { font-size: 1.15rem; }
+            h1 { font-size: 2.6rem; }
+            .hero-subtitle { font-size: 1.1rem; }
             .cta-group { flex-direction: column; align-items: center; }
             .btn { width: 100%; justify-content: center; }
             .flow-grid { flex-direction: column; }
@@ -587,7 +489,7 @@
 
     <header>
         <div class="container nav-wrapper">
-            <div class="logo">agy-cli-migrator</div>
+            <div class="logo"><span class="logo-symbol">⚡</span> agy-cli-migrator</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#architecture">Architecture</a></li>
@@ -601,13 +503,22 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="badge-container">
-                <span class="badge badge-cyan">🔒 Zero Dependencies</span>
-                <span class="badge badge-purple">💻 Cross-Platform Junctions</span>
-                <span class="badge">⚙️ 100% TDD Verified</span>
+                <span class="badge">
+                    <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    Zero Dependencies
+                </span>
+                <span class="badge">
+                    <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                    Cross-Platform Junctions
+                </span>
+                <span class="badge">
+                    <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    100% TDD Verified
+                </span>
             </div>
             <h1>Port Custom Agent Skills &amp; MCPs<br>to your new agy CLI Natively</h1>
             <p class="hero-subtitle">
-                A surgical, safe, and lightning-fast Python utility to unify all your agentic capabilities and custom Model Context Protocol configurations in under 0.05 seconds.
+                A surgical, safe, and zero-dependency Python utility to unify all your agentic capabilities and custom Model Context Protocol configurations in under 0.05 seconds.
             </p>
             <div class="cta-group">
                 <a href="https://github.com/arjunghosh/agy-cli-migrator" class="btn btn-primary" target="_blank">Get Started on GitHub</a>
@@ -619,9 +530,9 @@
         <section class="terminal-window">
             <div class="terminal-header">
                 <div class="terminal-dots">
-                    <span class="dot dot-red"></span>
-                    <span class="dot dot-yellow"></span>
-                    <span class="dot dot-green"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
                 </div>
                 <div class="terminal-title">interactive_demo.sh</div>
                 <div class="terminal-actions">
@@ -630,34 +541,40 @@
             </div>
             <div class="terminal-body" id="terminal-content"><span class="terminal-prompt">arjunghosh@M3-MacBook-Pro ~ %</span> <span id="demo-text">./agy_migrator.py --scan</span><span class="cursor" id="terminal-cursor"></span>
 <span id="demo-output">
-<span style="color:#06b6d4">=== scanning CLI environments ===</span>
+=== scanning CLI environments ===
 
 <span style="font-weight:bold">--- Capability Scan Inventory ---</span>
-Total skills in Claude: <span style="color:#06b6d4">22</span> | Present in agy: <span style="color:#06b6d4">72</span>
-Total MCPs in Claude:   <span style="color:#06b6d4">3</span>  | Present in agy: <span style="color:#06b6d4">4</span>
+Total skills in Claude: 22 | Present in agy: 72
+Total MCPs in Claude:   3  | Present in agy: 4
 
-<span style="color:#22c55e; font-weight:bold">✓ All Claude skills and MCP server profiles are already fully ported to your new agy CLI!</span>
+<span style="color:#10b981; font-weight:bold">✓ All Claude skills and MCP server profiles are already fully ported to your new agy CLI!</span>
 </span></div>
         </section>
 
         <!-- Features Grid -->
         <section id="features" class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
                 <h3>100% Automated Backups</h3>
                 <p>
                     Every configuration edit is preceded by a timestamped copy: `settings.json.YYYYMMDD_HHMMSS.bak`. Zero data risk.
                 </p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⛓️</div>
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>
+                </div>
                 <h3>Cross-Platform Compliance</h3>
                 <p>
                     POSIX standard symlinking on macOS/Linux. Standard Junctions (`mklink /J`) or safe copy fallback on Windows with zero terminal elevation requirements.
                 </p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⏪</div>
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v6h6"></path><path d="M3 13a9 9 0 0 1 15-7.36L21 8"></path></svg>
+                </div>
                 <h3>One-Command Rollback</h3>
                 <p>
                     A single CLI flag (`--rollback`) unlinks all ported skills and restores your configuration from the latest active backup.
@@ -695,15 +612,14 @@ Total MCPs in Claude:   <span style="color:#06b6d4">3</span>  | Present in agy: 
 
         <!-- Creator Profile -->
         <section class="author-box">
-            <div class="author-avatar">👨‍💻</div>
             <div class="author-title">Designed by Arjun Ghosh</div>
             <div class="author-role">Founder of Loyla.ai</div>
             <p class="author-bio">
                 Chief AI Officer (CAIO) &amp; CTO at Flexilytics.ai. Over 20+ years of technology leadership in Digital Transformation, Enterprise Architecture, and Agentic AI Solutions. Specialized in building secure, zero-dependency engineering pipelines.
             </p>
             <div class="author-links">
-                <a href="https://arjunghosh.github.io" target="_blank">🌐 personal website</a>
-                <a href="https://linkedin.com/in/arjunghosh" target="_blank">🔗 LinkedIn profile</a>
+                <a href="https://arjunghosh.github.io" target="_blank">🌐 Personal Website</a>
+                <a href="https://linkedin.com/in/arjunghosh" target="_blank">🔗 LinkedIn Profile</a>
                 <a href="https://github.com/arjunghosh" target="_blank">🐙 GitHub Profile</a>
                 <a href="https://loyla.ai" target="_blank">🚀 Loyla.ai Portal</a>
             </div>
@@ -726,32 +642,32 @@ Total MCPs in Claude:   <span style="color:#06b6d4">3</span>  | Present in agy: 
 
         const demoScript = [
             { cmd: "python3 agy_migrator.py --scan", output: `
-<span style="color:#06b6d4">=== scanning CLI environments ===</span>
-Total skills in Claude: <span style="color:#eab308">22</span> | Present in agy: <span style="color:#eab308">20</span>
-Total MCPs in Claude:   <span style="color:#eab308">3</span>  | Present in agy: <span style="color:#eab308">1</span>
+=== scanning CLI environments ===
+Total skills in Claude: <span style="color:#10b981">22</span> | Present in agy: <span style="color:#10b981">20</span>
+Total MCPs in Claude:   <span style="color:#10b981">3</span>  | Present in agy: <span style="color:#10b981">1</span>
 
-<span style="color:#eab308; font-weight:bold">Missing Skills to Port (2):</span>
+<span style="font-weight:bold">Missing Skills to Port (2):</span>
   01. agent-browser
   02. webapp-testing
 
-<span style="color:#eab308; font-weight:bold">Missing MCP Servers to Port (2):</span>
+<span style="font-weight:bold">Missing MCP Servers to Port (2):</span>
   01. github
   02. playwright
 
-<span style="color:#06b6d4">Dry-run complete. No changes were applied.</span>` },
+Dry-run complete. No changes were applied.` },
             { cmd: "python3 agy_migrator.py --all", output: `
-<span style="color:#06b6d4">=== Starting Porting Process ===</span>
+=== Starting Porting Process ===
 
-<span style="color:#22c55e">✓ Backup created successfully at settings.json.20260531_054500.bak</span>
-<span style="color:#22c55e">✓ Merged MCP server configuration: github</span>
-<span style="color:#22c55e">✓ Merged MCP server configuration: playwright</span>
+<span style="color:#10b981">✓ Backup created successfully at settings.json.20260531_054500.bak</span>
+<span style="color:#10b981">✓ Merged MCP server configuration: github</span>
+<span style="color:#10b981">✓ Merged MCP server configuration: playwright</span>
 
-<span style="color:#06b6d4">--- Porting Skills ---</span>
-<span style="color:#22c55e">✓ Symlinked skill: agent-browser -> /Users/arjunghosh/.agents/skills/agent-browser</span>
-<span style="color:#22c55e">✓ Symlinked skill: webapp-testing -> /Users/arjunghosh/.agents/skills/webapp-testing</span>
+--- Porting Skills ---
+<span style="color:#10b981">✓ Symlinked skill: agent-browser -> /Users/arjunghosh/.agents/skills/agent-browser</span>
+<span style="color:#10b981">✓ Symlinked skill: webapp-testing -> /Users/arjunghosh/.agents/skills/webapp-testing</span>
 
-<span style="color:#22c55e; font-weight:bold">✓ Ported 2 skills successfully!</span>
-<span style="color:#22c55e; font-weight:bold">Unified capability migration run completed successfully!</span>` }
+<span style="color:#10b981; font-weight:bold">✓ Ported 2 skills successfully!</span>
+<span style="color:#10b981; font-weight:bold">Unified capability migration run completed successfully!</span>` }
         ];
 
         btn.addEventListener("click", async () => {
@@ -784,8 +700,6 @@ Total MCPs in Claude:   <span style="color:#eab308">3</span>  | Present in agy: 
         function typeCommand(text) {
             return new Promise((resolve) => {
                 let index = 0;
-                // Temporarily detach cursor to put it inside the typed text if wanted, 
-                // but we can just append characters before the cursor
                 const interval = setInterval(() => {
                     if (index < text.length) {
                         demoText.innerHTML += text.charAt(index);
