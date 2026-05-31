@@ -1,0 +1,22 @@
+# agy-cli-migrator
+
+> Zero-dependency Python CLI utility to port custom skills, plugins, and Model Context Protocol (MCP) server profiles from traditional Claude/Codex setups into the unified Gemini/agy CLI.
+
+## Key Capabilities
+- **Scan & Diff**: Dry-run scanning of `~/.claude/mcp.json` and `~/.agents/skills/` against `~/.gemini/settings.json` and `~/.gemini/skills/`.
+- **Surgical Symlinking**: Creates POSIX symlinks on macOS/Linux and falls back to Directory Junctions (`mklink /J`) or directory copies on Windows, requiring no administrative privileges.
+- **MCP Merge**: Merges custom server configuration structures securely into `~/.gemini/settings.json`.
+- **Safety Backups**: Creates dated backup copies (`settings.json.YYYYMMDD_HHMMSS.bak`) before any mutation.
+- **Full Rollback**: `python3 agy_migrator.py --rollback` unlinks all ported skills and restores the latest settings backup.
+
+## Usage Guide
+- **Dry-run scan**: `python3 agy_migrator.py --scan`
+- **Interactive Migration**: `python3 agy_migrator.py`
+- **Bulk Migration**: `python3 agy_migrator.py --all`
+- **Revert Changes**: `python3 agy_migrator.py --rollback`
+- **Test suite**: `python3 -m unittest discover -s tests -p "test_*.py"`
+
+## Specifications
+- **Runtime**: Python 3.6+ standard library only.
+- **Compatibility**: macOS, Linux, Windows 10/11.
+- **Dependencies**: None.
