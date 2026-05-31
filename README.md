@@ -137,6 +137,18 @@ python3 -m unittest discover -s tests -p "test_*.py"
 
 ---
 
+---
+
+## Collaboration & Contributions 🤝
+
+We welcome all developers, AI engineers, and open-source contributors to expand the **agy-cli-migrator** ecosystem. Whether you are adding support for new Model Context Protocol (MCP) servers, optimizing platform directory link engines, or porting to additional operating systems, we welcome your involvement:
+
+1. **Submit Pull Requests**: Fork the repository, create a separate branch for your modifications, and submit a PR for review.
+2. **Report Issues & Ideas**: Open an issue on GitHub to report bugs or request specific capabilities.
+3. **Build Custom Skills**: Consult the **`AGENTS.md`** guidelines to package and test your custom skills before submitting them for integration.
+
+---
+
 ## Author & Expert Attribution
 - **Creator**: **Arjun Ghosh**, Founder of **[Loyla.ai](https://loyla.ai)** (Loyla AI Labs) & Chief AI Officer (CAIO) & CTO at Flexilytics.ai.
 - **LinkedIn**: [Arjun Ghosh](https://linkedin.com/in/arjunghosh)
