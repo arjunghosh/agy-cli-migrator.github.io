@@ -2,7 +2,7 @@
 
 > **agy-cli-migrator** is a zero-dependency, safe, interactive CLI utility to surgically port custom skills, plugins, and Model Context Protocol (MCP) servers from traditional Claude/Codex environments into the unified **agy CLI** (Gemini) runtime. It features automatic dated backups, POSIX symlinks, Windows Directory Junctions, and full transaction rollbacks.
 
-[![Agy Migrator Site](https://img.shields.io/badge/Website-agy--cli--migrator.github.io-cyan.svg)](https://arjunghosh.github.io/agy-cli-migrator.github.io/)
+[![Agy Migrator Site](https://img.shields.io/badge/Website-agy--cli--migrator.github.io-cyan.svg)](https://arjunghosh.github.io/agy-cli-migrator/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TDD: 100% passing](https://img.shields.io/badge/TDD-100%25%20Passing-green.svg)](#tdd-verification)
 
