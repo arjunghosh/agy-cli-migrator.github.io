@@ -7,27 +7,33 @@
     <meta name="description" content="A zero-dependency, safe, interactive CLI utility to port custom skills, plugins, and MCP servers into the unified agy CLI environment.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --text-color: #f3f4f6;
+            --bg-color: #030712;
+            --text-color: #f9fafb;
             --text-muted: #9ca3af;
             --primary: #06b6d4;
-            --primary-glow: rgba(6, 182, 212, 0.15);
-            --accent: #a855f7;
-            --accent-glow: rgba(168, 85, 247, 0.15);
-            --card-bg: rgba(17, 24, 39, 0.7);
+            --primary-glow: rgba(6, 182, 212, 0.25);
+            --accent: #8b5cf6;
+            --accent-glow: rgba(139, 92, 246, 0.25);
+            --card-bg: rgba(17, 24, 39, 0.6);
             --card-border: rgba(255, 255, 255, 0.08);
-            --terminal-bg: #030712;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --terminal-bg: #0b0f19;
+            --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --gradient-primary: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+            --gradient-glowing: linear-gradient(90deg, #06b6d4, #8b5cf6, #06b6d4);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -37,26 +43,27 @@
             line-height: 1.6;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1140px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
         /* Header / Navigation */
         header {
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             border-bottom: 1px solid var(--card-border);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(11, 15, 25, 0.7);
+            background: rgba(3, 7, 18, 0.7);
         }
 
         .nav-wrapper {
@@ -66,26 +73,27 @@
         }
 
         .logo {
-            font-weight: 800;
-            font-size: 1.5rem;
+            font-weight: 900;
+            font-size: 1.6rem;
             letter-spacing: -0.05em;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
 
         .logo::before {
-            content: "🚀";
+            content: "⚡";
             -webkit-text-fill-color: initial;
         }
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -93,124 +101,153 @@
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: color 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
         }
 
         /* Hero Section */
         .hero {
-            padding: 6rem 0 4rem;
+            padding: 7rem 0 4rem;
             text-align: center;
+            position: relative;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.04em;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -0.05em;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+            background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            font-weight: 400;
+            max-width: 750px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
         }
 
         .badge-container {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
 
         .badge {
-            background: rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--card-border);
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 9999px;
             font-size: 0.85rem;
-            font-weight: 500;
-            color: #d1d5db;
+            font-weight: 600;
+            color: #e5e7eb;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .badge:hover {
             background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.05);
         }
 
-        .badge-cyan { border-color: rgba(6, 182, 212, 0.3); color: var(--primary); }
-        .badge-purple { border-color: rgba(168, 85, 247, 0.3); color: var(--accent); }
+        .badge-cyan { border-color: rgba(6, 182, 212, 0.4); color: var(--primary); box-shadow: 0 0 15px rgba(6, 182, 212, 0.1); }
+        .badge-purple { border-color: rgba(139, 92, 246, 0.4); color: var(--accent); box-shadow: 0 0 15px rgba(139, 92, 246, 0.1); }
 
         /* CTA Buttons */
         .cta-group {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 4rem;
         }
 
         .btn {
-            padding: 0.8rem 2rem;
+            padding: 0.9rem 2.2rem;
             font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
+            font-weight: 700;
+            border-radius: 12px;
             text-decoration: none;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            background: var(--gradient-primary);
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);
+            box-shadow: 0 4px 25px rgba(6, 182, 212, 0.3);
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-primary:hover::after {
+            left: 100%;
         }
 
         .btn-primary:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(6, 182, 212, 0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(6, 182, 212, 0.55);
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--text-color);
-            border: 1px solid var(--card-border);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .btn-secondary:hover {
             background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-2px);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.15);
         }
 
         /* Interactive Terminal Simulator */
         .terminal-window {
             background-color: var(--terminal-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            max-width: 800px;
+            border-radius: 16px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(6, 182, 212, 0.05);
+            max-width: 850px;
             margin: 0 auto 5rem;
             overflow: hidden;
             text-align: left;
+            position: relative;
+        }
+
+        .terminal-window::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.5), transparent);
         }
 
         .terminal-header {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1rem 1.25rem;
             display: flex;
             align-items: center;
             border-bottom: 1px solid var(--card-border);
@@ -239,15 +276,42 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             font-family: var(--font-mono);
+            letter-spacing: 0.05em;
+        }
+
+        .terminal-actions {
+            margin-left: auto;
+        }
+
+        .demo-trigger {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .demo-trigger:hover {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         .terminal-body {
-            padding: 1.5rem;
+            padding: 1.75rem;
             font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: #d1d5db;
-            min-height: 250px;
+            font-size: 0.95rem;
+            color: #e5e7eb;
+            min-height: 380px;
+            max-height: 480px;
+            overflow-y: auto;
             white-space: pre-wrap;
+            position: relative;
         }
 
         .terminal-prompt {
@@ -255,102 +319,267 @@
             font-weight: bold;
         }
 
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: #ffffff;
+            margin-left: 4px;
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
         /* Features Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ffffff 60%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         .features-grid {
             display: grid;
-            grid-template-cols: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-cols: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
             margin-bottom: 6rem;
         }
 
         .feature-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 2.5rem 2rem;
-            backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(6, 182, 212, 0.3);
-            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.05);
+            transform: translateY(-8px);
+            border-color: rgba(6, 182, 212, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(6, 182, 212, 0.05);
         }
 
         .feature-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         .feature-card h3 {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             color: #ffffff;
         }
 
         .feature-card p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Graphical Flowchart Subsystem */
+        .flowchart-section {
+            margin-bottom: 6rem;
+            text-align: center;
+        }
+
+        .flowchart-wrapper {
+            background: rgba(17, 24, 39, 0.4);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3.5rem 2rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .flow-grid {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .flow-node {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-width: 180px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .flow-node:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.15);
+            transform: scale(1.05);
+        }
+
+        .flow-node h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .flow-node p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .flow-arrow {
+            font-size: 1.8rem;
+            color: var(--primary);
+            animation: pulse-arrow 1.5s infinite;
+        }
+
+        @keyframes pulse-arrow {
+            0% { transform: translateX(0); opacity: 0.5; }
+            50% { transform: translateX(5px); opacity: 1; }
+            100% { transform: translateX(0); opacity: 0.5; }
         }
 
         /* Author Section */
         .author-box {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.03), rgba(168, 85, 247, 0.03));
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 3rem;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.04), rgba(139, 92, 246, 0.04));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 24px;
+            padding: 4rem 3rem;
             text-align: center;
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto 6rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            position: relative;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.05);
+        }
+
+        .author-box::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: 10%; right: 10%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .author-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: rgba(139, 92, 246, 0.1);
         }
 
         .author-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: #ffffff;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .author-role {
+            font-size: 1.05rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .author-bio {
             color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
         }
 
         .author-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
 
         .author-links a {
-            color: var(--primary);
+            color: #ffffff;
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s ease;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.6rem 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .author-links a:hover {
-            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.2);
         }
 
         /* Footer */
         footer {
-            padding: 3rem 0;
+            padding: 4rem 0;
             border-top: 1px solid var(--card-border);
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            background: rgba(3, 7, 18, 0.9);
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.1rem; }
+            h1 { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 1.15rem; }
             .cta-group { flex-direction: column; align-items: center; }
-            .btn { width: 100%; text-align: center; }
+            .btn { width: 100%; justify-content: center; }
+            .flow-grid { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); margin: 0.5rem 0; }
         }
     </style>
 </head>
@@ -361,6 +590,7 @@
             <div class="logo">agy-cli-migrator</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
+                <li><a href="#architecture">Architecture</a></li>
                 <li><a href="https://github.com/arjunghosh/agy-cli-migrator" target="_blank">GitHub</a></li>
                 <li><a href="https://linkedin.com/in/arjunghosh" target="_blank">LinkedIn</a></li>
             </ul>
@@ -371,13 +601,13 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="badge-container">
-                <span class="badge badge-cyan">Zero Dependencies</span>
-                <span class="badge badge-purple">Windows &amp; Linux Ready</span>
-                <span class="badge">100% TDD Verified</span>
+                <span class="badge badge-cyan">🔒 Zero Dependencies</span>
+                <span class="badge badge-purple">💻 Cross-Platform Junctions</span>
+                <span class="badge">⚙️ 100% TDD Verified</span>
             </div>
-            <h1>Port Custom Skills &amp; MCPs<br>to your new agy CLI Natively</h1>
+            <h1>Port Custom Agent Skills &amp; MCPs<br>to your new agy CLI Natively</h1>
             <p class="hero-subtitle">
-                A surgical, safe, and lightning-fast Python utility to unify all your agentic capabilities and custom Model Context Protocol servers in 0.05 seconds.
+                A surgical, safe, and lightning-fast Python utility to unify all your agentic capabilities and custom Model Context Protocol configurations in under 0.05 seconds.
             </p>
             <div class="cta-group">
                 <a href="https://github.com/arjunghosh/agy-cli-migrator" class="btn btn-primary" target="_blank">Get Started on GitHub</a>
@@ -393,31 +623,21 @@
                     <span class="dot dot-yellow"></span>
                     <span class="dot dot-green"></span>
                 </div>
-                <div class="terminal-title">agy-cli-migrator --scan</div>
+                <div class="terminal-title">interactive_demo.sh</div>
+                <div class="terminal-actions">
+                    <button class="demo-trigger" id="run-demo-btn">▶ Run Interactive Demo</button>
+                </div>
             </div>
-            <div class="terminal-body" id="terminal-content">
-<span class="terminal-prompt">$</span> ./agy_migrator.py --scan
+            <div class="terminal-body" id="terminal-content"><span class="terminal-prompt">arjunghosh@M3-MacBook-Pro ~ %</span> <span id="demo-text">./agy_migrator.py --scan</span><span class="cursor" id="terminal-cursor"></span>
+<span id="demo-output">
+<span style="color:#06b6d4">=== scanning CLI environments ===</span>
 
-<span style="color:#22c55e">=== scanning CLI environments ===</span>
+<span style="font-weight:bold">--- Capability Scan Inventory ---</span>
+Total skills in Claude: <span style="color:#06b6d4">22</span> | Present in agy: <span style="color:#06b6d4">72</span>
+Total MCPs in Claude:   <span style="color:#06b6d4">3</span>  | Present in agy: <span style="color:#06b6d4">4</span>
 
---- Capability Scan Inventory ---
-Total skills in Claude: <b>24</b> | Present in agy: <b>53</b>
-Total MCPs in Claude:   <b>3</b>  | Present in agy: <b>2</b>
-
-<span style="color:#eab308">Missing Skills to Port (17):</span>
-  01. agent-browser
-  02. ai-seo
-  03. browser-use
-  04. cavecrew
-  05. caveman-commit
-  ... (12 more)
-
-<span style="color:#eab308">Missing MCP Servers to Port (2):</span>
-  01. github
-  02. playwright
-
-<span style="color:#06b6d4">Dry-run complete. No changes were applied. Run without --scan to port interactively!</span>
-            </div>
+<span style="color:#22c55e; font-weight:bold">✓ All Claude skills and MCP server profiles are already fully ported to your new agy CLI!</span>
+</span></div>
         </section>
 
         <!-- Features Grid -->
@@ -426,35 +646,66 @@ Total MCPs in Claude:   <b>3</b>  | Present in agy: <b>2</b>
                 <div class="feature-icon">🛡️</div>
                 <h3>100% Automated Backups</h3>
                 <p>
-                    Automatically creates timestamped settings backup files (`settings.json.YYYYMMDD_HHMMSS.bak`) before executing any file operations.
+                    Every configuration edit is preceded by a timestamped copy: `settings.json.YYYYMMDD_HHMMSS.bak`. Zero data risk.
                 </p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h3>Windows Junction Support</h3>
+                <div class="feature-icon">⛓️</div>
+                <h3>Cross-Platform Compliance</h3>
                 <p>
-                    Full cross-platform compliance. Automatically uses standard POSIX symlinks on Linux/macOS and falls back to Local Directory Junctions on Windows without administrative elevation.
+                    POSIX standard symlinking on macOS/Linux. Standard Junctions (`mklink /J`) or safe copy fallback on Windows with zero terminal elevation requirements.
                 </p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⏪</div>
                 <h3>One-Command Rollback</h3>
                 <p>
-                    Run `--rollback` at any time to instantly unlink all migrated skills and restore your settings file from the latest backup.
+                    A single CLI flag (`--rollback`) unlinks all ported skills and restores your configuration from the latest active backup.
                 </p>
+            </div>
+        </section>
+
+        <!-- Graphical Flowchart Subsystem -->
+        <section id="architecture" class="flowchart-section">
+            <h2 class="section-title">High-Level Data Flow</h2>
+            <div class="flowchart-wrapper">
+                <div class="flow-grid">
+                    <div class="flow-node">
+                        <h4>1. Scan Profiles</h4>
+                        <p>Locates Claude skill directories and `mcp.json` parameters.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">
+                        <h4>2. Compare Diff</h4>
+                        <p>Surgically maps missing items against active agy profiles.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">
+                        <h4>3. Create Link</h4>
+                        <p>Generates symlinks or directory junctions safely.</p>
+                    </div>
+                    <div class="flow-arrow">➔</div>
+                    <div class="flow-node">
+                        <h4>4. Merge JSON</h4>
+                        <p>Safely updates custom registers in settings.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Creator Profile -->
         <section class="author-box">
+            <div class="author-avatar">👨‍💻</div>
             <div class="author-title">Designed by Arjun Ghosh</div>
+            <div class="author-role">Founder of Loyla.ai</div>
             <p class="author-bio">
-                Chief AI Officer (CAIO) & Technology Leader with 20+ years of expertise in Digital Transformation, Enterprise IT Strategy, and Agentic AI Architecture. Founder of Loyla.ai and CAIO at Flexilytics.ai.
+                Chief AI Officer (CAIO) &amp; CTO at Flexilytics.ai. Over 20+ years of technology leadership in Digital Transformation, Enterprise Architecture, and Agentic AI Solutions. Specialized in building secure, zero-dependency engineering pipelines.
             </p>
             <div class="author-links">
-                <a href="https://linkedin.com/in/arjunghosh" target="_blank">LinkedIn</a>
-                <a href="https://flexilytics.ai" target="_blank">Flexilytics.ai</a>
-                <a href="https://loyla.ai" target="_blank">Loyla.ai</a>
+                <a href="https://arjunghosh.github.io" target="_blank">🌐 personal website</a>
+                <a href="https://linkedin.com/in/arjunghosh" target="_blank">🔗 LinkedIn profile</a>
+                <a href="https://github.com/arjunghosh" target="_blank">🐙 GitHub Profile</a>
+                <a href="https://loyla.ai" target="_blank">🚀 Loyla.ai Portal</a>
             </div>
         </section>
     </main>
@@ -466,9 +717,90 @@ Total MCPs in Claude:   <b>3</b>  | Present in agy: <b>2</b>
     </footer>
 
     <script>
-        // Micro-animations for terminal typing simulation
-        const terminalContent = document.getElementById("terminal-content");
-        // Could expand this to simulate full interactive ports on user scroll or click
+        const btn = document.getElementById("run-demo-btn");
+        const demoText = document.getElementById("demo-text");
+        const demoOutput = document.getElementById("demo-output");
+        const cursor = document.getElementById("terminal-cursor");
+
+        let isRunning = false;
+
+        const demoScript = [
+            { cmd: "python3 agy_migrator.py --scan", output: `
+<span style="color:#06b6d4">=== scanning CLI environments ===</span>
+Total skills in Claude: <span style="color:#eab308">22</span> | Present in agy: <span style="color:#eab308">20</span>
+Total MCPs in Claude:   <span style="color:#eab308">3</span>  | Present in agy: <span style="color:#eab308">1</span>
+
+<span style="color:#eab308; font-weight:bold">Missing Skills to Port (2):</span>
+  01. agent-browser
+  02. webapp-testing
+
+<span style="color:#eab308; font-weight:bold">Missing MCP Servers to Port (2):</span>
+  01. github
+  02. playwright
+
+<span style="color:#06b6d4">Dry-run complete. No changes were applied.</span>` },
+            { cmd: "python3 agy_migrator.py --all", output: `
+<span style="color:#06b6d4">=== Starting Porting Process ===</span>
+
+<span style="color:#22c55e">✓ Backup created successfully at settings.json.20260531_054500.bak</span>
+<span style="color:#22c55e">✓ Merged MCP server configuration: github</span>
+<span style="color:#22c55e">✓ Merged MCP server configuration: playwright</span>
+
+<span style="color:#06b6d4">--- Porting Skills ---</span>
+<span style="color:#22c55e">✓ Symlinked skill: agent-browser -> /Users/arjunghosh/.agents/skills/agent-browser</span>
+<span style="color:#22c55e">✓ Symlinked skill: webapp-testing -> /Users/arjunghosh/.agents/skills/webapp-testing</span>
+
+<span style="color:#22c55e; font-weight:bold">✓ Ported 2 skills successfully!</span>
+<span style="color:#22c55e; font-weight:bold">Unified capability migration run completed successfully!</span>` }
+        ];
+
+        btn.addEventListener("click", async () => {
+            if (isRunning) return;
+            isRunning = true;
+            btn.disabled = true;
+            btn.innerText = "⌛ Simulating...";
+
+            demoText.innerHTML = "";
+            demoOutput.innerHTML = "";
+            cursor.style.display = "inline-block";
+
+            // Run command 1
+            await typeCommand(demoScript[0].cmd);
+            await sleep(500);
+            demoOutput.innerHTML = demoScript[0].output;
+            await sleep(2000);
+
+            // Run command 2
+            demoOutput.innerHTML += "\n\n<span class='terminal-prompt'>arjunghosh@M3-MacBook-Pro ~ %</span> ";
+            await typeCommand(demoScript[1].cmd);
+            await sleep(500);
+            demoOutput.innerHTML += demoScript[1].output;
+            
+            btn.disabled = false;
+            btn.innerText = "▶ Run Interactive Demo";
+            isRunning = false;
+        });
+
+        function typeCommand(text) {
+            return new Promise((resolve) => {
+                let index = 0;
+                // Temporarily detach cursor to put it inside the typed text if wanted, 
+                // but we can just append characters before the cursor
+                const interval = setInterval(() => {
+                    if (index < text.length) {
+                        demoText.innerHTML += text.charAt(index);
+                        index++;
+                    } else {
+                        clearInterval(interval);
+                        resolve();
+                    }
+                }, 40);
+            });
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
     </script>
 </body>
 </html>

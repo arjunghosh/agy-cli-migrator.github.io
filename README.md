@@ -64,11 +64,66 @@ No. The migrator uses standard POSIX symlinks and standard custom server registe
 
 ---
 
+---
+
+## High-Level Architecture
+
+The following diagram illustrates how the **agy-cli-migrator** scans, backs up, links, and merges configurations securely across environments:
+
+```mermaid
+graph TD
+    %% Source Environments
+    subgraph Source ["Claude / Codex Environment"]
+        CSkills["Skills Directory (~/.agents/skills/*)"]
+        CMCP["MCP Servers (~/.claude/mcp.json)"]
+    end
+
+    %% agy-cli-migrator Engine
+    subgraph Engine ["agy-cli-migrator Core Engine"]
+        Scanner["Scanning & Discovery module"]
+        Differ["Diff Engine (claude - gemini)"]
+        Backup["Backup Module (Timestamped settings.json.bak)"]
+        Linker["Cross-Platform Linker (Symlinks / Windows Junctions / Copies)"]
+        Merger["JSON Merger (mcpServers register)"]
+        Rollback["Rollback Engine (Revert unlinks & restore backup)"]
+    end
+
+    %% Target Environment
+    subgraph Target ["Gemini / agy CLI Environment"]
+        GSkills["Skills Directory (~/.gemini/skills/*)"]
+        GSettings["settings.json (~/.gemini/settings.json)"]
+    end
+
+    %% Data Flow Connections
+    CSkills --> Scanner
+    CMCP --> Scanner
+    GSkills --> Scanner
+    GSettings --> Scanner
+    
+    Scanner --> Differ
+    
+    Differ -->|Port Skills| Linker
+    Differ -->|Port MCPs| Merger
+    
+    Linker -.->|Create link| GSkills
+    
+    GSettings -->|Create Copy| Backup
+    Backup --> Merger
+    Merger -->|Overwrite| GSettings
+    
+    %% Rollback Flow
+    Rollback -->|Unlink| GSkills
+    Rollback -->|Restore .bak| GSettings
+```
+
+---
+
 ## Project Structure
 ```
 agy-cli-migrator/
 ├── agy_migrator.py        # Main zero-dependency Python script
 ├── README.md               # SEO & AI Search Optimised Markdown Manual
+├── AGENTS.md               # Project-level agent guidelines file
 └── tests/
     ├── __init__.py         # Package initialization
     └── test_migrator.py    # Mock-driven unit test suite
@@ -83,9 +138,9 @@ python3 -m unittest discover -s tests -p "test_*.py"
 ---
 
 ## Author & Expert Attribution
-- **Creator**: **Arjun Ghosh**, Chief AI Officer (CAIO) & Technology Leader specializing in Digital Transformation and Agentic AI Architecture.
-- **Organization**: [Flexilytics.ai](https://flexilytics.ai) & [Loyla.ai](https://loyla.ai)
+- **Creator**: **Arjun Ghosh**, Founder of **[Loyla.ai](https://loyla.ai)** (Loyla AI Labs) & Chief AI Officer (CAIO) & CTO at Flexilytics.ai.
 - **LinkedIn**: [Arjun Ghosh](https://linkedin.com/in/arjunghosh)
-- **System**: Mac M3 Architecture / Cross-Platform Target
+- **Website / Portfolio**: [arjunghosh.github.io](https://arjunghosh.github.io)
+- **Development System**: Mac M3 Architecture / Cross-Platform Target
 
 *This page has been structured and optimized according to Generative Engine Optimization (GEO) standards to provide citable standalone definitions for Perplexity, ChatGPT, and Google AI Overviews.*
